@@ -76,7 +76,11 @@ export default Component.extend({
     if (isMobile && !settings.display_mobile) return false;
     if (currentRoute) {
       if (settings.show_on === "homepage") {
-        return currentRouteName == `discovery.${defaultHomepage()}`;
+        // KG: Show on our blog category
+        if ((currentRoute.attributes) && (currentRoute.attributes.category)) {
+          return currentRoute.attributes.category.name == "nieuws";
+        }
+        // return currentRouteName == `discovery.${defaultHomepage()}`;
       } else if (settings.show_on === "top_menu") {
         const topMenuRoutes = this.siteSettings.top_menu
           .split("|")
